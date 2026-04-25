@@ -26,9 +26,10 @@ class HomePage(Page):
         FieldPanel("mission_statement"),
     ]
 
-    subpage_types = [
-        "home.StandardPage",
-    ]
+subpage_types = [
+    "home.StandardPage",
+    "alumni.AlumniIndexPage",
+]
 
 
 class StandardPage(Page):

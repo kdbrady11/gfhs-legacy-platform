@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+
+<section class="section">
+    <div class="section-narrow">
+        <h1>{{ page.full_name }}</h1>
+
+        {% if page.graduation_year %}
+            <p class="lead"><strong>Class of {{ page.graduation_year }}</strong></p>
+        {% endif %}
+
+        <p><strong>Category:</strong> {{ page.get_category_display }}</p>
+
+        {% if page.short_summary %}
+            <p class="lead">{{ page.short_summary }}</p>
+        {% endif %}
+
+        {% if page.biography %}
+            <h2>Biography</h2>
+            {{ page.biography|richtext }}
+        {% endif %}
+
+        {% if page.major_achievements %}
+            <h2>Major Achievements</h2>
+            {{ page.major_achievements|richtext }}
+        {% endif %}
+
+        {% if page.legacy_statement %}
+            <h2>Legacy</h2>
+            {{ page.legacy_statement|richtext }}
+        {% endif %}
+    </div>
+</section>
+
+{% endblock %}

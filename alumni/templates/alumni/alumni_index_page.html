@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+
+<section class="section">
+    <div class="section-narrow">
+        <h1>{{ page.title }}</h1>
+
+        {% if page.intro %}
+            <div class="lead">
+                {{ page.intro|richtext }}
+            </div>
+        {% endif %}
+
+        <div class="card-grid">
+            {% for alum in alumni_pages %}
+                <article class="card">
+                    <div class="card-content">
+                        <h3>{{ alum.full_name }}</h3>
+
+                        {% if alum.graduation_year %}
+                            <p><strong>Class of {{ alum.graduation_year }}</strong></p>
+                        {% endif %}
+
+                        <p><strong>{{ alum.get_category_display }}</strong></p>
+                        <p>{{ alum.short_summary }}</p>
+
+                        <a href="{% pageurl alum %}">View Profile</a>
+                    </div>
+                </article>
+            {% empty %}
+                <p>No alumni profiles have been added yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}
