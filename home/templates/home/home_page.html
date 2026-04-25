@@ -1,21 +1,72 @@
 {% extends "base.html" %}
-{% load static %}
-
-{% block body_class %}template-homepage{% endblock %}
-
-{% block extra_css %}
-
-{% comment %}
-Delete the line below if you're just getting started and want to remove the welcome screen!
-{% endcomment %}
-<link rel="stylesheet" href="{% static 'css/welcome_page.css' %}">
-{% endblock extra_css %}
+{% load wagtailcore_tags %}
 
 {% block content %}
 
-{% comment %}
-Delete the line below if you're just getting started and want to remove the welcome screen!
-{% endcomment %}
-{% include 'home/welcome_page.html' %}
+<section class="hero">
+    <div class="hero-inner">
+        <h1>{{ page.hero_title }}</h1>
+        <p>{{ page.hero_subtitle }}</p>
 
-{% endblock content %}
+        <div class="button-row">
+            <a class="btn-primary" href="/legacy-alumni/">Explore Legacy Alumni</a>
+            <a class="btn-secondary" href="/donate/">Support the Mission</a>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-narrow">
+        <h2>Our Mission</h2>
+        <div class="lead">
+            {{ page.mission_statement|richtext }}
+        </div>
+    </div>
+</section>
+
+<section class="section section-alt">
+    <div class="section-narrow">
+        <h2>A Living Historical Archive</h2>
+        <p class="lead">
+            This platform is being built to preserve the stories, records, photographs,
+            documents, yearbooks, newspapers, and accomplishments connected to Great Falls High School.
+        </p>
+
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-content">
+                    <h3>Legacy Alumni</h3>
+                    <p>Honor graduates whose lives and achievements reflect the school’s lasting impact.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-content">
+                    <h3>School History</h3>
+                    <p>Preserve the moments, traditions, and milestones that define Great Falls High School.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-content">
+                    <h3>Historical Archives</h3>
+                    <p>Make yearbooks, newspapers, photos, records, and documents easier to find and explore.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-narrow">
+        <div class="callout">
+            <h2>Built for the Public Website and the Kiosk</h2>
+            <p>
+                This system is designed so association admins can update content once and use it across
+                the public website, historical archive, and touchscreen kiosk experience.
+            </p>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
