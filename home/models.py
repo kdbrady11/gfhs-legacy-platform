@@ -29,6 +29,8 @@ class HomePage(Page):
 subpage_types = [
     "home.StandardPage",
     "alumni.AlumniIndexPage",
+    "history.HistoryIndexPage",
+    "history.ArchivesIndexPage",
 ]
 
 

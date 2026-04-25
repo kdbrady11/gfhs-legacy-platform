@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+
+<section class="section">
+    <div class="section-narrow">
+        <h1>{{ page.title }}</h1>
+
+        {% if page.intro %}
+            <div class="lead">
+                {{ page.intro|richtext }}
+            </div>
+        {% endif %}
+
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-content">
+                    <h3>Yearbooks</h3>
+                    <p>Future home for digitized yearbooks and class records.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-content">
+                    <h3>Newspapers</h3>
+                    <p>Future home for student newspapers, clippings, and publications.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-content">
+                    <h3>Photos and Documents</h3>
+                    <p>Future home for photographs, programs, letters, records, and historical documents.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="callout">
+            <h2>Archive Expansion</h2>
+            <p>
+                This prototype establishes the archive structure. Future versions can add searchable PDFs,
+                document tagging, OCR, thumbnails, and year-by-year browsing.
+            </p>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

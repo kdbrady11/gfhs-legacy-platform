@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+
+<section class="section">
+    <div class="section-narrow">
+        <h1>{{ page.title }}</h1>
+
+        <p class="lead">
+            <strong>Year:</strong> {{ page.event_year }}
+        </p>
+
+        <p>
+            <strong>Category:</strong> {{ page.get_event_category_display }}
+        </p>
+
+        {% if page.short_summary %}
+            <p class="lead">{{ page.short_summary }}</p>
+        {% endif %}
+
+        {% if page.full_story %}
+            {{ page.full_story|richtext }}
+        {% endif %}
+    </div>
+</section>
+
+{% endblock %}
