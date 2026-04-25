@@ -1,0 +1,27 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GFHS Legacy Kiosk</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="{% static 'css/kiosk.css' %}">
+</head>
+<body>
+
+<div class="kiosk-shell">
+    <header class="kiosk-header">
+        <div class="kiosk-title">GFHS Legacy Alumni Association</div>
+        <a class="kiosk-home-link" href="/kiosk/">Home</a>
+    </header>
+
+    <main class="kiosk-main">
+        {% block kiosk_content %}{% endblock %}
+    </main>
+</div>
+
+<script src="{% static 'js/kiosk.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+{% extends "kiosk/kiosk_base.html" %}
+
+{% block kiosk_content %}
+
+<section class="kiosk-hero">
+    <h1>Legacy Alumni</h1>
+    <p>Honoring graduates whose achievements represent the legacy of Great Falls High School.</p>
+</section>
+
+<section class="kiosk-card-grid">
+    {% for alum in alumni %}
+        <article class="kiosk-card">
+            <h2>{{ alum.full_name }}</h2>
+
+            {% if alum.graduation_year %}
+                <p><strong>Class of {{ alum.graduation_year }}</strong></p>
+            {% endif %}
+
+            <p><strong>{{ alum.get_category_display }}</strong></p>
+            <p>{{ alum.short_summary }}</p>
+        </article>
+    {% empty %}
+        <p>No alumni profiles have been added yet.</p>
+    {% endfor %}
+</section>
+
+{% endblock %}
