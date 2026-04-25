@@ -25,3 +25,23 @@ class HomePage(Page):
         FieldPanel("hero_subtitle"),
         FieldPanel("mission_statement"),
     ]
+
+    subpage_types = [
+        "home.StandardPage",
+    ]
+
+
+class StandardPage(Page):
+    intro = models.TextField(blank=True)
+    body = RichTextField(blank=True)
+
+    content_panels = Page.content_panels + [
+        FieldPanel("intro"),
+        FieldPanel("body"),
+    ]
+
+    parent_page_types = [
+        "home.HomePage",
+    ]
+
+    subpage_types = []
