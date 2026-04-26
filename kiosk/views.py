@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, render
 
 from alumni.models import AlumniDetailPage
-from history.models import HistoricalEventPage
+from history.models import ArchiveItemPage, HistoricalEventPage
 
 
 def kiosk_home(request):
@@ -118,11 +118,19 @@ def kiosk_archives(request):
         },
     ]
 
+    featured_archive_items = (
+        ArchiveItemPage.objects.live()
+        .public()
+        .filter(featured_on_kiosk=True)
+        .order_by("-archive_year", "title")[:6]
+    )
+
     return render(
         request,
         "kiosk/kiosk_archives.html",
         {
             "archive_categories": archive_categories,
+            "featured_archive_items": featured_archive_items,
         },
     )
 

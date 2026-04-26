@@ -1,4 +1,5 @@
 {% extends "kiosk/kiosk_base.html" %}
+{% load wagtailimages_tags %}
 
 {% block kiosk_content %}
 
@@ -21,6 +22,44 @@
             <p>{{ category.description }}</p>
         </article>
     {% endfor %}
+</section>
+
+<section class="kiosk-archive-featured-section">
+    <div class="kiosk-section-heading">
+        <h1>Featured Archive Items</h1>
+        <p>Admin-selected historical materials available for kiosk display.</p>
+    </div>
+
+    <div class="kiosk-card-grid">
+        {% for item in featured_archive_items %}
+            <article class="kiosk-card">
+                {% if item.primary_image %}
+                    {% image item.primary_image fill-600x420 as archive_img %}
+                    <img class="kiosk-card-image" src="{{ archive_img.url }}" alt="{{ item.title }}">
+                {% else %}
+                    <div class="kiosk-card-image-placeholder">
+                        <span>{{ item.get_document_type_display|first }}</span>
+                    </div>
+                {% endif %}
+
+                <h2>{{ item.title }}</h2>
+
+                {% if item.archive_year %}
+                    <p><strong>{{ item.archive_year }}</strong></p>
+                {% endif %}
+
+                <p><strong>{{ item.get_document_type_display }}</strong></p>
+                <p>{{ item.short_description }}</p>
+            </article>
+        {% empty %}
+            <article class="kiosk-card">
+                <h2>No Featured Items Yet</h2>
+                <p>
+                    Archive items marked as featured for kiosk display will appear here.
+                </p>
+            </article>
+        {% endfor %}
+    </div>
 </section>
 
 {% endblock %}
