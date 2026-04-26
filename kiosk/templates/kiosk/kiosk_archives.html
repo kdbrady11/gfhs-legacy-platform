@@ -32,7 +32,7 @@
 
     <div class="kiosk-card-grid">
         {% for item in featured_archive_items %}
-            <article class="kiosk-card">
+            <a class="kiosk-card kiosk-card-link" href="/kiosk/archives/{{ item.slug }}/">
                 {% if item.primary_image %}
                     {% image item.primary_image fill-600x420 as archive_img %}
                     <img class="kiosk-card-image" src="{{ archive_img.url }}" alt="{{ item.title }}">
@@ -50,7 +50,7 @@
 
                 <p><strong>{{ item.get_document_type_display }}</strong></p>
                 <p>{{ item.short_description }}</p>
-            </article>
+            </a>
         {% empty %}
             <article class="kiosk-card">
                 <h2>No Featured Items Yet</h2>

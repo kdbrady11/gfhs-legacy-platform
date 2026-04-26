@@ -9,5 +9,6 @@ urlpatterns = [
     path("history/", views.kiosk_history, name="kiosk_history"),
     path("history/<slug:slug>/", views.kiosk_history_detail, name="kiosk_history_detail"),
     path("archives/", views.kiosk_archives, name="kiosk_archives"),
+    path("archives/<slug:slug>/", views.kiosk_archive_detail, name="kiosk_archive_detail"),
     path("support/", views.kiosk_support, name="kiosk_support"),
 ]

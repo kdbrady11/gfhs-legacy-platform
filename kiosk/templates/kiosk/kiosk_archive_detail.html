@@ -1,0 +1,63 @@
+{% extends "kiosk/kiosk_base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block kiosk_content %}
+
+<section class="kiosk-detail-layout">
+    <div class="kiosk-detail-media">
+        {% if archive_item.primary_image %}
+            {% image archive_item.primary_image width-1000 as archive_img %}
+            <img class="kiosk-detail-image" src="{{ archive_img.url }}" alt="{{ archive_item.title }}">
+        {% else %}
+            <div class="kiosk-detail-placeholder">
+                <span>{{ archive_item.get_document_type_display|first }}</span>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="kiosk-detail-content">
+        <p class="kiosk-eyebrow">{{ archive_item.get_document_type_display }}</p>
+
+        <h1>{{ archive_item.title }}</h1>
+
+        {% if archive_item.archive_year %}
+            <p class="kiosk-detail-year">{{ archive_item.archive_year }}</p>
+        {% endif %}
+
+        {% if archive_item.short_description %}
+            <p class="kiosk-detail-summary">{{ archive_item.short_description }}</p>
+        {% endif %}
+
+        {% if archive_item.full_description %}
+            <div class="kiosk-detail-section">
+                <h2>Historical Context</h2>
+                {{ archive_item.full_description|richtext }}
+            </div>
+        {% endif %}
+
+        {% if archive_item.archive_file %}
+            <div class="kiosk-detail-section">
+                <h2>Archive File</h2>
+                <p>
+                    This item includes an uploaded archive file. For the kiosk experience,
+                    the final version may display a QR code so visitors can open the file on
+                    their own device.
+                </p>
+            </div>
+
+            <div class="kiosk-qr-placeholder">
+                <div class="kiosk-qr-box">
+                    QR
+                </div>
+                <p>QR code for this archive item coming soon.</p>
+            </div>
+        {% endif %}
+
+        <div class="kiosk-detail-actions">
+            <a class="kiosk-action-button" href="/kiosk/archives/">Back to Archives</a>
+            <a class="kiosk-action-button secondary" href="/kiosk/">Kiosk Home</a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -346,6 +346,25 @@ body {
     background: var(--gfhs-navy);
 }
 
+.clickable-card {
+    cursor: pointer;
+}
+
+.card-button {
+    display: inline-block;
+    margin-top: 0.75rem;
+    color: var(--gfhs-white);
+    background: var(--gfhs-columbia-dark);
+    font-weight: 900;
+    text-decoration: none;
+    padding: 0.7rem 1rem;
+    border-radius: 999px;
+}
+
+.card-button:hover {
+    background: var(--gfhs-navy);
+}
+
 /* =========================
    Images
 ========================= */

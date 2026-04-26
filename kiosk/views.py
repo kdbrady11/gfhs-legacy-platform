@@ -134,5 +134,19 @@ def kiosk_archives(request):
         },
     )
 
+def kiosk_archive_detail(request, slug):
+    archive_item = get_object_or_404(
+        ArchiveItemPage.objects.live().public(),
+        slug=slug,
+    )
+
+    return render(
+        request,
+        "kiosk/kiosk_archive_detail.html",
+        {
+            "archive_item": archive_item,
+        },
+    )
+
 def kiosk_support(request):
     return render(request, "kiosk/kiosk_support.html")
