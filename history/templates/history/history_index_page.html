@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags wagtailimages_tags %}
 
 {% block content %}
 
@@ -15,6 +15,15 @@
 
         {% for event in events %}
             <article class="card" style="margin-bottom: 1.5rem;">
+                {% if event.primary_image %}
+                    {% image event.primary_image fill-900x420 as history_img %}
+                    <img class="card-image wide" src="{{ history_img.url }}" alt="{{ event.title }}">
+                {% else %}
+                    <div class="card-image-placeholder wide">
+                        <span>{{ event.event_year }}</span>
+                    </div>
+                {% endif %}
+
                 <div class="card-content">
                     <h2>{{ event.event_year }}: {{ event.title }}</h2>
                     <p><strong>{{ event.get_event_category_display }}</strong></p>

@@ -1,13 +1,20 @@
 {% extends "kiosk/kiosk_base.html" %}
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags wagtailimages_tags %}
 
 {% block kiosk_content %}
 
 <section class="kiosk-history-detail">
     <div class="kiosk-history-year-panel">
-        <p class="kiosk-eyebrow">{{ event.get_event_category_display }}</p>
-        <h1>{{ event.event_year }}</h1>
-        <p>Great Falls High School History</p>
+        {% if event.primary_image %}
+            {% image event.primary_image fill-900x720 as history_detail_img %}
+            <img class="kiosk-history-detail-image" src="{{ history_detail_img.url }}" alt="{{ event.title }}">
+        {% endif %}
+
+        <div class="kiosk-history-year-content">
+            <p class="kiosk-eyebrow">{{ event.get_event_category_display }}</p>
+            <h1>{{ event.event_year }}</h1>
+            <p>Great Falls High School History</p>
+        </div>
     </div>
 
     <div class="kiosk-detail-content">

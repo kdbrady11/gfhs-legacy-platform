@@ -402,3 +402,28 @@ body {
         min-height: 320px;
     }
 }
+
+.kiosk-history-year-panel {
+    overflow: hidden;
+}
+
+.kiosk-history-detail-image {
+    width: calc(100% + 6rem);
+    height: 320px;
+    object-fit: cover;
+    margin: -3rem -3rem 2rem;
+    display: block;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.kiosk-history-year-content {
+    position: relative;
+    z-index: 1;
+}
+
+.kiosk-card-image-placeholder span {
+    width: auto;
+    min-width: 110px;
+    padding: 0 1.4rem;
+    border-radius: 999px;
+}

@@ -238,6 +238,18 @@ body {
     letter-spacing: 0.05em;
 }
 
+.card-image.wide,
+.card-image-placeholder.wide {
+    height: 260px;
+}
+
+.card-image-placeholder.wide span {
+    width: auto;
+    min-width: 120px;
+    padding: 0 1.5rem;
+    border-radius: 999px;
+}
+
 .detail-hero-image {
     width: 100%;
     max-height: 520px;

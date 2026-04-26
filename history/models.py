@@ -30,6 +30,15 @@ class HistoryIndexPage(Page):
 class HistoricalEventPage(Page):
     event_year = models.PositiveIntegerField()
 
+    primary_image = models.ForeignKey(
+        "wagtailimages.Image",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+        help_text="Primary image used on history cards, public detail pages, and kiosk displays.",
+    )
+
     event_category = models.CharField(
         max_length=100,
         choices=[
@@ -59,12 +68,23 @@ class HistoricalEventPage(Page):
             [
                 FieldPanel("event_year"),
                 FieldPanel("event_category"),
+                FieldPanel("primary_image"),
             ],
             heading="Historical Event Details",
         ),
-        FieldPanel("short_summary"),
-        FieldPanel("full_story"),
-        FieldPanel("featured_on_kiosk"),
+        MultiFieldPanel(
+            [
+                FieldPanel("short_summary"),
+                FieldPanel("full_story"),
+            ],
+            heading="Historical Story",
+        ),
+        MultiFieldPanel(
+            [
+                FieldPanel("featured_on_kiosk"),
+            ],
+            heading="Display Options",
+        ),
     ]
 
     parent_page_types = [
