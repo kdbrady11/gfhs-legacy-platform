@@ -12,6 +12,49 @@
                 {{ page.intro|richtext }}
             </div>
         {% endif %}
+        <form class="archive-filter-form" method="get">
+            <div class="archive-filter-grid">
+                <div>
+                    <label for="alumni-search">Search alumni</label>
+                    <input
+                        id="alumni-search"
+                        type="text"
+                        name="q"
+                        value="{{ search_query }}"
+                        placeholder="Search by name, summary, achievements, or legacy"
+                    >
+                </div>
+
+                <div>
+                    <label for="alumni-category">Category</label>
+                    <select id="alumni-category" name="category">
+                        <option value="">All categories</option>
+                        {% for category_value, category_label in category_labels.items %}
+                            <option value="{{ category_value }}" {% if selected_category == category_value %}selected{% endif %}>
+                                {{ category_label }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div>
+                    <label for="alumni-year">Graduation year</label>
+                    <select id="alumni-year" name="year">
+                        <option value="">All years</option>
+                        {% for year in available_years %}
+                            <option value="{{ year }}" {% if selected_year == year|stringformat:"s" %}selected{% endif %}>
+                                {{ year }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="archive-filter-actions">
+                    <button type="submit">Apply Filters</button>
+                    <a href="/legacy-alumni/">Reset</a>
+                </div>
+            </div>
+        </form>
 
         <div class="card-grid">
             {% for alum in alumni_pages %}
