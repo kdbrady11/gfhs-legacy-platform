@@ -191,10 +191,17 @@ if USE_R2:
     AWS_S3_FILE_OVERWRITE = False
     AWS_LOCATION = "media"
 
-    R2_PUBLIC_URL = os.environ.get("R2_PUBLIC_URL")
+    R2_PUBLIC_URL = os.environ.get("R2_PUBLIC_URL", "").rstrip("/")
 
     if R2_PUBLIC_URL:
-        MEDIA_URL = f"{R2_PUBLIC_URL.rstrip('/')}/{AWS_LOCATION}/"
+        AWS_S3_CUSTOM_DOMAIN = (
+            R2_PUBLIC_URL
+            .replace("https://", "")
+            .replace("http://", "")
+            .rstrip("/")
+        )
+        AWS_S3_URL_PROTOCOL = "https:"
+        MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/"
     else:
         MEDIA_URL = f"{AWS_S3_ENDPOINT_URL}/{AWS_STORAGE_BUCKET_NAME}/{AWS_LOCATION}/"
 
