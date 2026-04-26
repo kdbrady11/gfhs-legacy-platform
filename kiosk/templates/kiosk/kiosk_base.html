@@ -14,7 +14,9 @@
 <div class="kiosk-shell">
     <header class="kiosk-header">
         <div class="kiosk-title">GFHS Legacy Alumni Association</div>
-        <a class="kiosk-home-link" href="/kiosk/">Home</a>
+        {% if request.path != "/kiosk/" %}
+            <a class="kiosk-home-link" href="/kiosk/">Home</a>
+        {% endif %}
     </header>
 
     <main class="kiosk-main">
