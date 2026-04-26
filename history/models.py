@@ -112,7 +112,9 @@ class ArchivesIndexPage(Page):
     def get_context(self, request):
         context = super().get_context(request)
 
-        selected_type = request.GET.get("type")
+        selected_type = request.GET.get("type", "").strip()
+        selected_year = request.GET.get("year", "").strip()
+        search_query = request.GET.get("q", "").strip()
 
         type_labels = {
             "yearbook": "Yearbooks",
@@ -133,9 +135,34 @@ class ArchivesIndexPage(Page):
         if selected_type in type_labels:
             archive_items = archive_items.filter(document_type=selected_type)
 
+        if selected_year.isdigit():
+            archive_items = archive_items.filter(archive_year=int(selected_year))
+
+        if search_query:
+            archive_items = archive_items.filter(
+                models.Q(title__icontains=search_query)
+                | models.Q(short_description__icontains=search_query)
+                | models.Q(full_description__icontains=search_query)
+                | models.Q(source_or_donor__icontains=search_query)
+                | models.Q(credit_line__icontains=search_query)
+            )
+
+        available_years = (
+            ArchiveItemPage.objects.live()
+            .public()
+            .exclude(archive_year__isnull=True)
+            .order_by("-archive_year")
+            .values_list("archive_year", flat=True)
+            .distinct()
+        )
+
         context["archive_items"] = archive_items
         context["selected_type"] = selected_type
         context["selected_type_label"] = type_labels.get(selected_type)
+        context["selected_year"] = selected_year
+        context["search_query"] = search_query
+        context["type_labels"] = type_labels
+        context["available_years"] = available_years
 
         return context
 
