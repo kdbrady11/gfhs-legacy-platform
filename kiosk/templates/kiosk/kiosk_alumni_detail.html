@@ -1,0 +1,52 @@
+{% extends "kiosk/kiosk_base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block kiosk_content %}
+
+<section class="kiosk-detail-layout">
+    <div class="kiosk-detail-media">
+        {% if alum.primary_image %}
+            {% image alum.primary_image fill-900x720 as detail_img %}
+            <img class="kiosk-detail-image" src="{{ detail_img.url }}" alt="{{ alum.full_name }}">
+        {% else %}
+            <div class="kiosk-detail-placeholder">
+                <span>{{ alum.first_name|first }}{{ alum.last_name|first }}</span>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="kiosk-detail-content">
+        <p class="kiosk-eyebrow">{{ alum.get_category_display }}</p>
+
+        <h1>{{ alum.full_name }}</h1>
+
+        {% if alum.graduation_year %}
+            <p class="kiosk-detail-year">Class of {{ alum.graduation_year }}</p>
+        {% endif %}
+
+        {% if alum.short_summary %}
+            <p class="kiosk-detail-summary">{{ alum.short_summary }}</p>
+        {% endif %}
+
+        {% if alum.major_achievements %}
+            <div class="kiosk-detail-section">
+                <h2>Major Achievements</h2>
+                {{ alum.major_achievements|richtext }}
+            </div>
+        {% endif %}
+
+        {% if alum.legacy_statement %}
+            <div class="kiosk-detail-section">
+                <h2>Legacy</h2>
+                {{ alum.legacy_statement|richtext }}
+            </div>
+        {% endif %}
+
+        <div class="kiosk-detail-actions">
+            <a class="kiosk-action-button" href="/kiosk/alumni/">Back to Alumni</a>
+            <a class="kiosk-action-button secondary" href="/kiosk/">Kiosk Home</a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

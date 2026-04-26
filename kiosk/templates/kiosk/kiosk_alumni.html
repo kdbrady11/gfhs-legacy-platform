@@ -10,7 +10,7 @@
 
 <section class="kiosk-card-grid">
     {% for alum in alumni %}
-        <article class="kiosk-card">
+        <a class="kiosk-card kiosk-card-link" href="/kiosk/alumni/{{ alum.slug }}/">
             {% if alum.primary_image %}
                 {% image alum.primary_image fill-600x360 as kiosk_img %}
                 <img class="kiosk-card-image" src="{{ kiosk_img.url }}" alt="{{ alum.full_name }}">
@@ -28,7 +28,7 @@
 
             <p><strong>{{ alum.get_category_display }}</strong></p>
             <p>{{ alum.short_summary }}</p>
-        </article>
+        </a>
     {% empty %}
         <p>No alumni profiles have been added yet.</p>
     {% endfor %}

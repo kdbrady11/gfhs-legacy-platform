@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 
 from alumni.models import AlumniDetailPage
 from history.models import HistoricalEventPage
@@ -41,6 +41,21 @@ def kiosk_alumni(request):
         "kiosk/kiosk_alumni.html",
         {
             "alumni": alumni,
+        },
+    )
+
+
+def kiosk_alumni_detail(request, slug):
+    alum = get_object_or_404(
+        AlumniDetailPage.objects.live().public(),
+        slug=slug,
+    )
+
+    return render(
+        request,
+        "kiosk/kiosk_alumni_detail.html",
+        {
+            "alum": alum,
         },
     )
 
