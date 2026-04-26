@@ -125,3 +125,6 @@ def kiosk_archives(request):
             "archive_categories": archive_categories,
         },
     )
+
+def kiosk_support(request):
+    return render(request, "kiosk/kiosk_support.html")

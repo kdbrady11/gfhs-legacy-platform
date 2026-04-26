@@ -1,0 +1,45 @@
+{% extends "kiosk/kiosk_base.html" %}
+
+{% block kiosk_content %}
+
+<section class="kiosk-detail-layout">
+    <div class="kiosk-history-year-panel">
+        <div class="kiosk-history-year-content">
+            <p class="kiosk-eyebrow">Support the Legacy</p>
+            <h1>Give</h1>
+            <p>Help preserve Great Falls High School history for future generations.</p>
+        </div>
+    </div>
+
+    <div class="kiosk-detail-content">
+        <h1>Support the GFHS Legacy Alumni Association</h1>
+
+        <p class="kiosk-detail-summary">
+            Donations help preserve historical materials, recognize distinguished alumni,
+            digitize yearbooks and newspapers, support future kiosk displays, and make
+            Great Falls High School history accessible to the community.
+        </p>
+
+        <div class="kiosk-detail-section">
+            <h2>Donation Experience</h2>
+            <p>
+                For security, visitors should not enter payment information directly on a public kiosk.
+                The final version of this screen should display a QR code that opens the secure donation
+                page on the visitor’s personal phone.
+            </p>
+        </div>
+
+        <div class="kiosk-qr-placeholder">
+            <div class="kiosk-qr-box">
+                QR
+            </div>
+            <p>Secure donation QR code coming soon.</p>
+        </div>
+
+        <div class="kiosk-detail-actions">
+            <a class="kiosk-action-button" href="/kiosk/">Kiosk Home</a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
