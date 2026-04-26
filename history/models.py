@@ -188,13 +188,73 @@ class ArchiveItemPage(Page):
         help_text="Longer explanation, context, or historical notes about this item.",
     )
 
+    source_or_donor = models.CharField(
+        max_length=255,
+        blank=True,
+        help_text="Person, family, department, organization, or source that provided the item.",
+    )
+
+    credit_line = models.CharField(
+        max_length=255,
+        blank=True,
+        help_text="Public credit line, if one should be displayed.",
+    )
+
+    permission_status = models.CharField(
+        max_length=100,
+        choices=[
+            ("unknown", "Unknown"),
+            ("approved", "Approved for Public Display"),
+            ("internal_only", "Internal Use Only"),
+            ("needs_review", "Needs Review"),
+            ("restricted", "Restricted"),
+        ],
+        default="needs_review",
+        help_text="Controls whether the item has been reviewed for public display.",
+    )
+
+    digitization_status = models.CharField(
+        max_length=100,
+        choices=[
+            ("not_started", "Not Started"),
+            ("in_progress", "In Progress"),
+            ("digitized", "Digitized"),
+            ("quality_checked", "Quality Checked"),
+            ("published", "Published"),
+        ],
+        default="not_started",
+        help_text="Tracks where this item is in the preservation workflow.",
+    )
+
+    physical_location = models.CharField(
+        max_length=255,
+        blank=True,
+        help_text="Physical storage location, box number, binder, shelf, cabinet, or future NAS/archive reference.",
+    )
+
+    internal_notes = models.TextField(
+        blank=True,
+        help_text="Private admin notes. These are not intended for public display.",
+    )
+
+    public_display_approved = models.BooleanField(
+        default=False,
+        help_text="Check only after the item has been reviewed and approved for public display.",
+    )
+
     featured_on_kiosk = models.BooleanField(default=False)
 
     search_fields = Page.search_fields + [
         index.SearchField("short_description"),
         index.SearchField("full_description"),
+        index.SearchField("source_or_donor"),
+        index.SearchField("credit_line"),
+        index.SearchField("physical_location"),
         index.FilterField("archive_year"),
         index.FilterField("document_type"),
+        index.FilterField("permission_status"),
+        index.FilterField("digitization_status"),
+        index.FilterField("public_display_approved"),
     ]
 
     content_panels = Page.content_panels + [
@@ -213,6 +273,23 @@ class ArchiveItemPage(Page):
                 FieldPanel("full_description"),
             ],
             heading="Archive Description",
+        ),
+        MultiFieldPanel(
+            [
+                FieldPanel("source_or_donor"),
+                FieldPanel("credit_line"),
+                FieldPanel("physical_location"),
+            ],
+            heading="Source, Credit, and Location",
+        ),
+        MultiFieldPanel(
+            [
+                FieldPanel("permission_status"),
+                FieldPanel("digitization_status"),
+                FieldPanel("public_display_approved"),
+                FieldPanel("internal_notes"),
+            ],
+            heading="Governance and Review",
         ),
         MultiFieldPanel(
             [
