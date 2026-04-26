@@ -696,3 +696,129 @@ body {
     color: rgba(255,255,255,0.94);
     margin: 0;
 }
+
+/* =========================
+   Kiosk Readability Polish
+========================= */
+
+.kiosk-card,
+.kiosk-detail-content {
+    background: var(--gfhs-white);
+    color: var(--gfhs-navy);
+}
+
+.kiosk-card h1,
+.kiosk-card h2,
+.kiosk-card h3,
+.kiosk-card strong,
+.kiosk-detail-content h1,
+.kiosk-detail-content h2,
+.kiosk-detail-content h3,
+.kiosk-detail-content strong {
+    color: var(--gfhs-navy);
+}
+
+.kiosk-card p,
+.kiosk-detail-summary,
+.kiosk-detail-section p,
+.kiosk-detail-section li {
+    color: #263445;
+}
+
+.kiosk-action-button {
+    background: var(--gfhs-navy);
+    color: var(--gfhs-white);
+    border: 3px solid var(--gfhs-navy);
+}
+
+.kiosk-action-button:hover {
+    background: var(--gfhs-columbia-dark);
+    color: var(--gfhs-white);
+    border-color: var(--gfhs-columbia-dark);
+}
+
+.kiosk-action-button.secondary {
+    background: var(--gfhs-white);
+    color: var(--gfhs-navy);
+    border: 3px solid var(--gfhs-navy);
+}
+
+.kiosk-action-button.secondary:hover {
+    background: var(--gfhs-navy);
+    color: var(--gfhs-white);
+}
+
+.kiosk-home-link {
+    background: var(--gfhs-white);
+    color: var(--gfhs-navy);
+    border-color: var(--gfhs-white);
+}
+
+.kiosk-home-link:hover {
+    background: var(--gfhs-columbia);
+    color: var(--gfhs-navy);
+}
+
+.kiosk-eyebrow {
+    background: var(--gfhs-columbia-soft);
+    color: var(--gfhs-navy);
+    border: 1px solid rgba(77, 179, 230, 0.38);
+}
+
+.kiosk-qr-placeholder {
+    background: var(--gfhs-white);
+    color: var(--gfhs-navy);
+}
+
+.kiosk-qr-placeholder p {
+    color: #263445;
+}
+
+/* =========================
+   Kiosk History Detail Contrast Fix
+========================= */
+
+.kiosk-history-year-panel {
+    background:
+        radial-gradient(circle at top left, rgba(77,179,230,0.35), transparent 34%),
+        linear-gradient(135deg, var(--gfhs-navy), var(--gfhs-navy-light) 55%, var(--gfhs-columbia-deep));
+    border: 3px solid rgba(255,255,255,0.35);
+    box-shadow: 0 28px 70px rgba(7,30,58,0.42);
+}
+
+.kiosk-history-year-panel .kiosk-eyebrow {
+    background: var(--gfhs-white);
+    color: var(--gfhs-navy);
+    border: 2px solid var(--gfhs-columbia);
+    box-shadow: 0 8px 22px rgba(7,30,58,0.18);
+}
+
+.kiosk-history-year-panel h1 {
+    color: var(--gfhs-white);
+    text-shadow: 0 5px 20px rgba(0,0,0,0.35);
+}
+
+.kiosk-history-year-panel p {
+    color: var(--gfhs-white);
+    text-shadow: 0 3px 14px rgba(0,0,0,0.26);
+    font-weight: 800;
+}
+
+.kiosk-history-year-content {
+    background: rgba(7,30,58,0.22);
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+    border: 1px solid rgba(255,255,255,0.18);
+}
+
+.kiosk-detail-content {
+    border-top: 14px solid var(--gfhs-columbia);
+}
+
+.kiosk-detail-content h1 {
+    color: var(--gfhs-navy);
+}
+
+.kiosk-detail-summary {
+    color: #1F2933;
+}
