@@ -23,6 +23,13 @@
         {% if archive_item.archive_year %}
             <p class="kiosk-detail-year">{{ archive_item.archive_year }}</p>
         {% endif %}
+        {% if archive_item.credit_line %}
+            <p><strong>Credit:</strong> {{ archive_item.credit_line }}</p>
+        {% endif %}
+
+        {% if archive_item.source_or_donor %}
+            <p><strong>Source:</strong> {{ archive_item.source_or_donor }}</p>
+        {% endif %}
 
         {% if archive_item.short_description %}
             <p class="kiosk-detail-summary">{{ archive_item.short_description }}</p>

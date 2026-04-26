@@ -17,6 +17,13 @@
         {% endif %}
 
         <p><strong>Archive Type:</strong> {{ page.get_document_type_display }}</p>
+            {% if page.credit_line %}
+                <p><strong>Credit:</strong> {{ page.credit_line }}</p>
+            {% endif %}
+
+            {% if page.source_or_donor %}
+                <p><strong>Source:</strong> {{ page.source_or_donor }}</p>
+            {% endif %}
 
         {% if page.short_description %}
             <p class="lead">{{ page.short_description }}</p>
