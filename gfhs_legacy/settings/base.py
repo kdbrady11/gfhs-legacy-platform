@@ -191,7 +191,12 @@ if USE_R2:
     AWS_S3_FILE_OVERWRITE = False
     AWS_LOCATION = "media"
 
-    MEDIA_URL = f"{AWS_S3_ENDPOINT_URL}/{AWS_STORAGE_BUCKET_NAME}/{AWS_LOCATION}/"
+    R2_PUBLIC_URL = os.environ.get("R2_PUBLIC_URL")
+
+    if R2_PUBLIC_URL:
+        MEDIA_URL = f"{R2_PUBLIC_URL.rstrip('/')}/{AWS_LOCATION}/"
+    else:
+        MEDIA_URL = f"{AWS_S3_ENDPOINT_URL}/{AWS_STORAGE_BUCKET_NAME}/{AWS_LOCATION}/"
 
     STORAGES["default"] = {
         "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
