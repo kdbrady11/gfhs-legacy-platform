@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+
+<section class="section">
+    <div class="section-narrow">
+        <h1>{{ page.title }}</h1>
+
+        {% if page.primary_image %}
+            {% image page.primary_image width-1200 as archive_img %}
+            <img class="detail-hero-image" src="{{ archive_img.url }}" alt="{{ page.title }}">
+        {% endif %}
+
+        {% if page.archive_year %}
+            <p class="lead"><strong>Year:</strong> {{ page.archive_year }}</p>
+        {% endif %}
+
+        <p><strong>Archive Type:</strong> {{ page.get_document_type_display }}</p>
+
+        {% if page.short_description %}
+            <p class="lead">{{ page.short_description }}</p>
+        {% endif %}
+
+        {% if page.full_description %}
+            <h2>Historical Context</h2>
+            {{ page.full_description|richtext }}
+        {% endif %}
+
+        {% if page.archive_file %}
+            <div class="callout">
+                <h2>View Document</h2>
+                <p>
+                    This archive item includes an uploaded document or file.
+                </p>
+                <a class="btn-primary" href="{{ page.archive_file.url }}" target="_blank" rel="noopener">
+                    Open Archive File
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</section>
+
+{% endblock %}

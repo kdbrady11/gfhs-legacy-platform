@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags wagtailimages_tags %}
 
 {% block content %}
 
@@ -17,31 +17,61 @@
             <div class="card">
                 <div class="card-content">
                     <h3>Yearbooks</h3>
-                    <p>Future home for digitized yearbooks and class records.</p>
+                    <p>Digitized yearbooks and class records.</p>
                 </div>
             </div>
 
             <div class="card">
                 <div class="card-content">
                     <h3>Newspapers</h3>
-                    <p>Future home for student newspapers, clippings, and publications.</p>
+                    <p>Student newspapers, clippings, and publications.</p>
                 </div>
             </div>
 
             <div class="card">
                 <div class="card-content">
                     <h3>Photos and Documents</h3>
-                    <p>Future home for photographs, programs, letters, records, and historical documents.</p>
+                    <p>Photographs, programs, letters, records, and historical documents.</p>
                 </div>
             </div>
         </div>
 
         <div class="callout">
-            <h2>Archive Expansion</h2>
+            <h2>Preserved Archive Items</h2>
             <p>
-                This prototype establishes the archive structure. Future versions can add searchable PDFs,
-                document tagging, OCR, thumbnails, and year-by-year browsing.
+                Archive items added by admins will appear below. This section can preserve yearbooks,
+                newspapers, photographs, programs, athletic records, and other historical materials.
             </p>
+        </div>
+
+        <div class="card-grid">
+            {% for item in archive_items %}
+                <article class="card">
+                    {% if item.primary_image %}
+                        {% image item.primary_image fill-600x420 as archive_img %}
+                        <img class="card-image" src="{{ archive_img.url }}" alt="{{ item.title }}">
+                    {% else %}
+                        <div class="card-image-placeholder">
+                            <span>{{ item.get_document_type_display|first }}</span>
+                        </div>
+                    {% endif %}
+
+                    <div class="card-content">
+                        <h3>{{ item.title }}</h3>
+
+                        {% if item.archive_year %}
+                            <p><strong>{{ item.archive_year }}</strong></p>
+                        {% endif %}
+
+                        <p><strong>{{ item.get_document_type_display }}</strong></p>
+                        <p>{{ item.short_description }}</p>
+
+                        <a href="{% pageurl item %}">View Archive Item</a>
+                    </div>
+                </article>
+            {% empty %}
+                <p>No archive items have been added yet.</p>
+            {% endfor %}
         </div>
     </div>
 </section>
