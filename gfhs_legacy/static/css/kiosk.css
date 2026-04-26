@@ -139,6 +139,43 @@ body {
     line-height: 1.5;
 }
 
+.kiosk-card-image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 1.1rem;
+    margin-bottom: 1.25rem;
+    background: var(--gfhs-light-gray);
+}
+
+.kiosk-card-image-placeholder {
+    width: 100%;
+    height: 220px;
+    border-radius: 1.1rem;
+    margin-bottom: 1.25rem;
+    background:
+        radial-gradient(circle at top left, rgba(108,180,238,0.35), transparent 35%),
+        linear-gradient(135deg, var(--gfhs-navy), #12345B);
+    color: var(--gfhs-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.kiosk-card-image-placeholder span {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.14);
+    border: 2px solid rgba(255,255,255,0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2rem;
+    font-weight: 900;
+    letter-spacing: 0.05em;
+}
+
 @media (max-width: 900px) {
     .kiosk-header {
         flex-direction: column;
