@@ -1,0 +1,1 @@
+web: gunicorn gfhs_legacy.wsgi:application
