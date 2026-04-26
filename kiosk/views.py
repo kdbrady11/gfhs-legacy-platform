@@ -119,9 +119,9 @@ def kiosk_archives(request):
             "description": "Preserve graduation programs, event materials, fine arts programs, and school celebrations.",
         },
         {
-            "title": "Support the Archive",
-            "slug": "support-archive",
-            "description": "Help digitize, organize, and protect the historical materials that tell the story of Great Falls High School.",
+            "title": "Contribute Materials",
+            "slug": "contribute-materials",
+            "description": "Learn how to share yearbooks, newspapers, photos, programs, records, and other historical materials for review.",
         },
     ]
 
@@ -169,9 +169,9 @@ def kiosk_archive_category(request, category_slug):
             "description": "Graduation programs, event materials, fine arts programs, and school celebrations will be organized here.",
             "document_types": ["program", "fine_arts"],
         },
-        "support-archive": {
-            "title": "Support the Archive",
-            "description": "Support future digitization, organization, and protection of Great Falls High School historical materials.",
+        "contribute-materials": {
+            "title": "Contribute Materials",
+            "description": "Have yearbooks, newspapers, photos, programs, records, or historical materials to share? This section explains how materials can be reviewed, approved, digitized, and added by association admins.",
             "document_types": [],
         },
     }

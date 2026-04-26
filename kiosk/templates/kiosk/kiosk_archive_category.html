@@ -30,13 +30,40 @@
             <p>{{ item.short_description }}</p>
         </a>
     {% empty %}
-        <article class="kiosk-card">
-            <h2>Coming Soon</h2>
-            <p>
-                Archive items for this category will appear here as materials are digitized,
-                uploaded, reviewed, and published by association admins.
-            </p>
-        </article>
+        {% if category.title == "Contribute Materials" %}
+            <article class="kiosk-card">
+                <h2>Material Review Process</h2>
+                <p>
+                    Historical materials should be reviewed before being added to the public archive.
+                    Visitors can contact the association to share yearbooks, newspapers, photos,
+                    programs, records, or other items for consideration.
+                </p>
+            </article>
+
+            <article class="kiosk-card">
+                <h2>Why Review Matters</h2>
+                <p>
+                    Review helps confirm names, dates, permissions, image quality, historical accuracy,
+                    and whether the material is appropriate for public display.
+                </p>
+            </article>
+
+            <article class="kiosk-card">
+                <h2>Future Workflow</h2>
+                <p>
+                    A future version can include a contact form or QR code so visitors can start the
+                    contribution process from their own device.
+                </p>
+            </article>
+        {% else %}
+            <article class="kiosk-card">
+                <h2>Coming Soon</h2>
+                <p>
+                    Archive items for this category will appear here as materials are digitized,
+                    reviewed, uploaded, and published by association admins.
+                </p>
+            </article>
+        {% endif %}
     {% endfor %}
 </section>
 
