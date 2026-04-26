@@ -427,3 +427,23 @@ body {
     padding: 0 1.4rem;
     border-radius: 999px;
 }
+
+.archive-kiosk-card {
+    min-height: 300px;
+}
+
+.archive-icon-circle {
+    width: 86px;
+    height: 86px;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at top left, rgba(108,180,238,0.35), transparent 40%),
+        linear-gradient(135deg, var(--gfhs-navy), #12345B);
+    color: var(--gfhs-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.4rem;
+    font-weight: 900;
+    margin-bottom: 1.25rem;
+}

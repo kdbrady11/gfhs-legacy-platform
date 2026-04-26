@@ -1,0 +1,26 @@
+{% extends "kiosk/kiosk_base.html" %}
+
+{% block kiosk_content %}
+
+<section class="kiosk-hero">
+    <h1>Historical Archives</h1>
+    <p>
+        Explore the preserved materials, records, photographs, yearbooks, newspapers,
+        and documents that tell the story of Great Falls High School.
+    </p>
+</section>
+
+<section class="kiosk-card-grid">
+    {% for category in archive_categories %}
+        <article class="kiosk-card archive-kiosk-card">
+            <div class="archive-icon-circle">
+                {{ category.title|first }}
+            </div>
+
+            <h2>{{ category.title }}</h2>
+            <p>{{ category.description }}</p>
+        </article>
+    {% endfor %}
+</section>
+
+{% endblock %}

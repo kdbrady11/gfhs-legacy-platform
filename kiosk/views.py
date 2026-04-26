@@ -89,3 +89,39 @@ def kiosk_history_detail(request, slug):
             "event": event,
         },
     )
+
+def kiosk_archives(request):
+    archive_categories = [
+        {
+            "title": "Yearbooks",
+            "description": "Future home for digitized yearbooks, class records, senior sections, and school memories.",
+        },
+        {
+            "title": "Newspapers",
+            "description": "Preserve student newspapers, clippings, publications, and stories from across generations.",
+        },
+        {
+            "title": "Photos and Documents",
+            "description": "Organize photographs, programs, letters, records, and other historical materials.",
+        },
+        {
+            "title": "Athletic Records",
+            "description": "Highlight teams, seasons, records, championships, all-state athletes, and athletic milestones.",
+        },
+        {
+            "title": "Programs and Events",
+            "description": "Preserve graduation programs, event materials, fine arts programs, and school celebrations.",
+        },
+        {
+            "title": "Support the Archive",
+            "description": "Help digitize, organize, and protect the historical materials that tell the story of Great Falls High School.",
+        },
+    ]
+
+    return render(
+        request,
+        "kiosk/kiosk_archives.html",
+        {
+            "archive_categories": archive_categories,
+        },
+    )
