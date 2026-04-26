@@ -33,6 +33,15 @@ class AlumniDetailPage(Page):
     last_name = models.CharField(max_length=100)
     graduation_year = models.PositiveIntegerField(null=True, blank=True)
 
+    primary_image = models.ForeignKey(
+        "wagtailimages.Image",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+        help_text="Primary photo used on alumni cards, detail pages, homepage features, and kiosk displays.",
+    )
+
     category = models.CharField(
         max_length=100,
         choices=[
@@ -76,19 +85,25 @@ class AlumniDetailPage(Page):
                 FieldPanel("last_name"),
                 FieldPanel("graduation_year"),
                 FieldPanel("category"),
+                FieldPanel("primary_image"),
             ],
-            heading="Basic Information",
+            heading="Basic Alumni Information",
         ),
-        FieldPanel("short_summary"),
-        FieldPanel("biography"),
-        FieldPanel("major_achievements"),
-        FieldPanel("legacy_statement"),
+        MultiFieldPanel(
+            [
+                FieldPanel("short_summary"),
+                FieldPanel("biography"),
+                FieldPanel("major_achievements"),
+                FieldPanel("legacy_statement"),
+            ],
+            heading="Profile Story and Legacy",
+        ),
         MultiFieldPanel(
             [
                 FieldPanel("featured_on_homepage"),
                 FieldPanel("featured_on_kiosk"),
             ],
-            heading="Feature Options",
+            heading="Display Options",
         ),
     ]
 

@@ -1,11 +1,15 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags wagtailimages_tags %}
 
 {% block content %}
 
 <section class="section">
     <div class="section-narrow">
         <h1>{{ page.full_name }}</h1>
+        {% if page.primary_image %}
+            {% image page.primary_image fill-1000x520 as detail_img %}
+            <img class="detail-hero-image" src="{{ detail_img.url }}" alt="{{ page.full_name }}">
+        {% endif %}
 
         {% if page.graduation_year %}
             <p class="lead"><strong>Class of {{ page.graduation_year }}</strong></p>

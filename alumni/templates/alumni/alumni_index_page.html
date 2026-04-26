@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags wagtailimages_tags %}
 
 {% block content %}
 
@@ -16,6 +16,14 @@
         <div class="card-grid">
             {% for alum in alumni_pages %}
                 <article class="card">
+                    {% if alum.primary_image %}
+                        {% image alum.primary_image fill-600x360 as card_img %}
+                        <img class="card-image" src="{{ card_img.url }}" alt="{{ alum.full_name }}">
+                    {% else %}
+                        <div class="card-image-placeholder">
+                            <span>{{ alum.first_name|first }}{{ alum.last_name|first }}</span>
+                        </div>
+                    {% endif %}
                     <div class="card-content">
                         <h3>{{ alum.full_name }}</h3>
 
