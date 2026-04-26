@@ -26,12 +26,26 @@ class HomePage(Page):
         FieldPanel("mission_statement"),
     ]
 
-subpage_types = [
-    "home.StandardPage",
-    "alumni.AlumniIndexPage",
-    "history.HistoryIndexPage",
-    "history.ArchivesIndexPage",
-]
+    subpage_types = [
+        "home.StandardPage",
+        "alumni.AlumniIndexPage",
+        "history.HistoryIndexPage",
+        "history.ArchivesIndexPage",
+    ]
+
+    def get_context(self, request):
+        context = super().get_context(request)
+
+        from alumni.models import AlumniDetailPage
+
+        context["featured_alumni"] = (
+            AlumniDetailPage.objects.live()
+            .public()
+            .filter(featured_on_homepage=True)
+            .order_by("last_name", "first_name")[:3]
+        )
+
+        return context
 
 
 class StandardPage(Page):

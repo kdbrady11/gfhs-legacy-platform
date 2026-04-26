@@ -23,7 +23,35 @@
         </div>
     </div>
 </section>
+<section class="section section-alt">
+    <div class="section-narrow">
+        <h2>Featured Legacy Alumni</h2>
+        <p class="lead">
+            A preview of how the association can honor alumni stories and achievements through one shared content system.
+        </p>
 
+        <div class="card-grid">
+            {% for alum in featured_alumni %}
+                <article class="card">
+                    <div class="card-content">
+                        <h3>{{ alum.full_name }}</h3>
+
+                        {% if alum.graduation_year %}
+                            <p><strong>Class of {{ alum.graduation_year }}</strong></p>
+                        {% endif %}
+
+                        <p><strong>{{ alum.get_category_display }}</strong></p>
+                        <p>{{ alum.short_summary }}</p>
+
+                        <a href="{% pageurl alum %}">View Profile</a>
+                    </div>
+                </article>
+            {% empty %}
+                <p>No featured alumni have been selected yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
 <section class="section section-alt">
     <div class="section-narrow">
         <h2>A Living Historical Archive</h2>
