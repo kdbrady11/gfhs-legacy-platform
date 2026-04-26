@@ -34,7 +34,7 @@
             {% for alum in featured_alumni %}
                 <article class="card">
                     {% if alum.primary_image %}
-                        {% image alum.primary_image fill-600x360 as card_img %}
+                        {% image alum.primary_image width-700 as card_img %}
                         <img class="card-image" src="{{ card_img.url }}" alt="{{ alum.full_name }}">
                     {% else %}
                         <div class="card-image-placeholder">

@@ -6,7 +6,7 @@
 <section class="kiosk-detail-layout">
     <div class="kiosk-detail-media">
         {% if alum.primary_image %}
-            {% image alum.primary_image fill-900x720 as detail_img %}
+            {% image alum.primary_image width-1000 as detail_img %}
             <img class="kiosk-detail-image" src="{{ detail_img.url }}" alt="{{ alum.full_name }}">
         {% else %}
             <div class="kiosk-detail-placeholder">

@@ -6,7 +6,7 @@
 <section class="kiosk-history-detail">
     <div class="kiosk-history-year-panel">
         {% if event.primary_image %}
-            {% image event.primary_image fill-900x720 as history_detail_img %}
+            {% image event.primary_image width-1000 as history_detail_img %}
             <img class="kiosk-history-detail-image" src="{{ history_detail_img.url }}" alt="{{ event.title }}">
         {% endif %}
 

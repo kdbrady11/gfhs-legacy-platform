@@ -12,7 +12,7 @@
     {% for alum in alumni %}
         <a class="kiosk-card kiosk-card-link" href="/kiosk/alumni/{{ alum.slug }}/">
             {% if alum.primary_image %}
-                {% image alum.primary_image fill-600x360 as kiosk_img %}
+                {% image alum.primary_image width-700 as kiosk_img %}
                 <img class="kiosk-card-image" src="{{ kiosk_img.url }}" alt="{{ alum.full_name }}">
             {% else %}
                 <div class="kiosk-card-image-placeholder">

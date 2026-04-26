@@ -12,7 +12,7 @@
     {% for event in events %}
         <a class="kiosk-card kiosk-card-link" href="/kiosk/history/{{ event.slug }}/">
             {% if event.primary_image %}
-                {% image event.primary_image fill-600x360 as kiosk_img %}
+                {% image event.primary_image width-700 as kiosk_img %}
                 <img class="kiosk-card-image" src="{{ kiosk_img.url }}" alt="{{ event.title }}">
             {% else %}
                 <div class="kiosk-card-image-placeholder">
