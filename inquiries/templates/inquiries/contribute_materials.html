@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="section">
+    <div class="section-narrow">
+        <h1>Contribute Historical Materials</h1>
+
+        <p class="lead">
+            Have yearbooks, newspapers, photos, programs, athletic records, or other historical materials connected to Great Falls High School?
+            Use this form to start the review process. Materials are reviewed by the association before anything is added to the public archive or kiosk.
+        </p>
+
+        <form class="contribution-form" method="post">
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                <div class="form-errors">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+
+            {% for field in form %}
+                <div class="form-field {% if field.field.widget.input_type == 'checkbox' %}form-field-checkbox{% endif %}">
+                    {{ field.label_tag }}
+                    {{ field }}
+
+                    {% if field.help_text %}
+                        <p class="form-help">{{ field.help_text }}</p>
+                    {% endif %}
+
+                    {% for error in field.errors %}
+                        <p class="form-error">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+
+            <button class="btn-primary form-submit-button" type="submit">
+                Submit Inquiry
+            </button>
+        </form>
+    </div>
+</section>
+
+{% endblock %}

@@ -584,6 +584,79 @@ body {
 .site-footer p {
     margin: 0.35rem 0;
 }
+/* =========================
+   Contribution
+========================= */
+.contribution-form {
+    margin-top: 2rem;
+    padding: 2rem;
+    border-radius: 1.5rem;
+    background: var(--gfhs-columbia-soft);
+    border: 1px solid rgba(77, 179, 230, 0.32);
+    box-shadow: 0 14px 34px rgba(7, 30, 58, 0.08);
+}
+
+.form-field {
+    margin-bottom: 1.25rem;
+}
+
+.form-field label {
+    display: block;
+    margin-bottom: 0.45rem;
+    font-weight: 900;
+    color: var(--gfhs-navy);
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+    width: 100%;
+    min-height: 46px;
+    border-radius: 0.85rem;
+    border: 1px solid var(--gfhs-medium-gray);
+    padding: 0.75rem 0.9rem;
+    font-size: 1rem;
+    color: var(--gfhs-text);
+    background: var(--gfhs-white);
+}
+
+.form-field textarea {
+    resize: vertical;
+}
+
+.form-field-checkbox {
+    padding: 1rem;
+    border-radius: 1rem;
+    background: var(--gfhs-white);
+    border: 1px solid var(--gfhs-medium-gray);
+}
+
+.form-field-checkbox label {
+    display: inline;
+    margin-left: 0.5rem;
+}
+
+.form-field-checkbox input {
+    width: auto;
+    min-height: auto;
+}
+
+.form-help {
+    margin: 0.45rem 0 0;
+    color: #52616F;
+    font-size: 0.95rem;
+}
+
+.form-error,
+.form-errors {
+    color: #9B1C1C;
+    font-weight: 800;
+}
+
+.form-submit-button {
+    border: 0;
+    cursor: pointer;
+}
 
 /* =========================
    Mobile

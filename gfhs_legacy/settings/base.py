@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     "alumni",
     "history",
     "kiosk",
+    "inquiries",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.embeds",
