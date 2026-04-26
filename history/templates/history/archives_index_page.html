@@ -14,33 +14,44 @@
         {% endif %}
 
         <div class="card-grid">
-            <div class="card">
+            <a class="card archive-category-card" href="/archives/?type=yearbook">
                 <div class="card-content">
                     <h3>Yearbooks</h3>
                     <p>Digitized yearbooks and class records.</p>
                 </div>
-            </div>
+            </a>
 
-            <div class="card">
+            <a class="card archive-category-card" href="/archives/?type=newspaper">
                 <div class="card-content">
                     <h3>Newspapers</h3>
                     <p>Student newspapers, clippings, and publications.</p>
                 </div>
-            </div>
+            </a>
 
-            <div class="card">
+            <a class="card archive-category-card" href="/archives/?type=photo">
                 <div class="card-content">
                     <h3>Photos and Documents</h3>
                     <p>Photographs, programs, letters, records, and historical documents.</p>
                 </div>
-            </div>
+            </a>
         </div>
 
         <div class="callout">
-            <h2>Preserved Archive Items</h2>
+            <h2>
+                {% if selected_type_label %}
+                    {{ selected_type_label }}
+                {% else %}
+                    Preserved Archive Items
+                {% endif %}
+            </h2>
             <p>
-                Archive items added by admins will appear below. This section can preserve yearbooks,
-                newspapers, photographs, programs, athletic records, and other historical materials.
+                {% if selected_type_label %}
+                    Showing archive items categorized as {{ selected_type_label }}.
+                    <a class="inline-light-link" href="/archives/">View all archive items</a>
+                {% else %}
+                    Archive items added by admins will appear below. This section can preserve yearbooks,
+                    newspapers, photographs, programs, athletic records, and other historical materials.
+                {% endif %}
             </p>
         </div>
 

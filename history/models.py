@@ -111,11 +111,32 @@ class ArchivesIndexPage(Page):
 
     def get_context(self, request):
         context = super().get_context(request)
-        context["archive_items"] = (
+
+        selected_type = request.GET.get("type")
+
+        type_labels = {
+            "yearbook": "Yearbooks",
+            "newspaper": "Newspapers",
+            "photo": "Photos",
+            "program": "Programs",
+            "athletic_record": "Athletic Records",
+            "fine_arts": "Fine Arts",
+            "general_document": "General Documents",
+        }
+
+        archive_items = (
             ArchiveItemPage.objects.live()
             .public()
             .order_by("-archive_year", "title")
         )
+
+        if selected_type in type_labels:
+            archive_items = archive_items.filter(document_type=selected_type)
+
+        context["archive_items"] = archive_items
+        context["selected_type"] = selected_type
+        context["selected_type_label"] = type_labels.get(selected_type)
+
         return context
 
 
