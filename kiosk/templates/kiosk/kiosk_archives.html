@@ -13,14 +13,14 @@
 
 <section class="kiosk-card-grid">
     {% for category in archive_categories %}
-        <article class="kiosk-card archive-kiosk-card">
+        <a class="kiosk-card kiosk-card-link archive-kiosk-card" href="/kiosk/archives/category/{{ category.slug }}/">
             <div class="archive-icon-circle">
                 {{ category.title|first }}
             </div>
 
             <h2>{{ category.title }}</h2>
             <p>{{ category.description }}</p>
-        </article>
+        </a>
     {% endfor %}
 </section>
 

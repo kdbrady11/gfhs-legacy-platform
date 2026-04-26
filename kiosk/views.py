@@ -90,30 +90,37 @@ def kiosk_history_detail(request, slug):
         },
     )
 
+
 def kiosk_archives(request):
     archive_categories = [
         {
             "title": "Yearbooks",
+            "slug": "yearbooks",
             "description": "Future home for digitized yearbooks, class records, senior sections, and school memories.",
         },
         {
             "title": "Newspapers",
+            "slug": "newspapers",
             "description": "Preserve student newspapers, clippings, publications, and stories from across generations.",
         },
         {
             "title": "Photos and Documents",
+            "slug": "photos-documents",
             "description": "Organize photographs, programs, letters, records, and other historical materials.",
         },
         {
             "title": "Athletic Records",
+            "slug": "athletic-records",
             "description": "Highlight teams, seasons, records, championships, all-state athletes, and athletic milestones.",
         },
         {
             "title": "Programs and Events",
+            "slug": "programs-events",
             "description": "Preserve graduation programs, event materials, fine arts programs, and school celebrations.",
         },
         {
             "title": "Support the Archive",
+            "slug": "support-archive",
             "description": "Help digitize, organize, and protect the historical materials that tell the story of Great Falls High School.",
         },
     ]
@@ -134,6 +141,70 @@ def kiosk_archives(request):
         },
     )
 
+
+def kiosk_archive_category(request, category_slug):
+    category_map = {
+        "yearbooks": {
+            "title": "Yearbooks",
+            "description": "Digitized yearbooks, class records, senior sections, and school memories will be organized here.",
+            "document_types": ["yearbook"],
+        },
+        "newspapers": {
+            "title": "Newspapers",
+            "description": "Student newspapers, clippings, publications, and school stories will be organized here.",
+            "document_types": ["newspaper"],
+        },
+        "photos-documents": {
+            "title": "Photos and Documents",
+            "description": "Photographs, programs, letters, records, and general documents will be organized here.",
+            "document_types": ["photo", "general_document"],
+        },
+        "athletic-records": {
+            "title": "Athletic Records",
+            "description": "Teams, seasons, championships, records, and athletic milestones will be organized here.",
+            "document_types": ["athletic_record"],
+        },
+        "programs-events": {
+            "title": "Programs and Events",
+            "description": "Graduation programs, event materials, fine arts programs, and school celebrations will be organized here.",
+            "document_types": ["program", "fine_arts"],
+        },
+        "support-archive": {
+            "title": "Support the Archive",
+            "description": "Support future digitization, organization, and protection of Great Falls High School historical materials.",
+            "document_types": [],
+        },
+    }
+
+    category = category_map.get(
+        category_slug,
+        {
+            "title": "Archive Category",
+            "description": "This archive category is not available yet.",
+            "document_types": [],
+        },
+    )
+
+    archive_items = ArchiveItemPage.objects.none()
+
+    if category["document_types"]:
+        archive_items = (
+            ArchiveItemPage.objects.live()
+            .public()
+            .filter(document_type__in=category["document_types"])
+            .order_by("-archive_year", "title")
+        )
+
+    return render(
+        request,
+        "kiosk/kiosk_archive_category.html",
+        {
+            "category": category,
+            "archive_items": archive_items,
+        },
+    )
+
+
 def kiosk_archive_detail(request, slug):
     archive_item = get_object_or_404(
         ArchiveItemPage.objects.live().public(),
@@ -147,6 +218,7 @@ def kiosk_archive_detail(request, slug):
             "archive_item": archive_item,
         },
     )
+
 
 def kiosk_support(request):
     return render(request, "kiosk/kiosk_support.html")

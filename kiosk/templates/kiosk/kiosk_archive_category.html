@@ -1,0 +1,48 @@
+{% extends "kiosk/kiosk_base.html" %}
+{% load wagtailimages_tags %}
+
+{% block kiosk_content %}
+
+<section class="kiosk-hero">
+    <h1>{{ category.title }}</h1>
+    <p>{{ category.description }}</p>
+</section>
+
+<section class="kiosk-card-grid">
+    {% for item in archive_items %}
+        <a class="kiosk-card kiosk-card-link" href="/kiosk/archives/{{ item.slug }}/">
+            {% if item.primary_image %}
+                {% image item.primary_image fill-600x420 as archive_img %}
+                <img class="kiosk-card-image" src="{{ archive_img.url }}" alt="{{ item.title }}">
+            {% else %}
+                <div class="kiosk-card-image-placeholder">
+                    <span>{{ item.get_document_type_display|first }}</span>
+                </div>
+            {% endif %}
+
+            <h2>{{ item.title }}</h2>
+
+            {% if item.archive_year %}
+                <p><strong>{{ item.archive_year }}</strong></p>
+            {% endif %}
+
+            <p><strong>{{ item.get_document_type_display }}</strong></p>
+            <p>{{ item.short_description }}</p>
+        </a>
+    {% empty %}
+        <article class="kiosk-card">
+            <h2>Coming Soon</h2>
+            <p>
+                Archive items for this category will appear here as materials are digitized,
+                uploaded, reviewed, and published by association admins.
+            </p>
+        </article>
+    {% endfor %}
+</section>
+
+<div class="kiosk-detail-actions" style="max-width: 1350px; margin: 2.5rem auto 0;">
+    <a class="kiosk-action-button" href="/kiosk/archives/">Back to Archives</a>
+    <a class="kiosk-action-button secondary" href="/kiosk/">Kiosk Home</a>
+</div>
+
+{% endblock %}
