@@ -1,0 +1,43 @@
+{% extends "kiosk/kiosk_base.html" %}
+{% load wagtailcore_tags %}
+
+{% block kiosk_content %}
+
+<section class="kiosk-history-detail">
+    <div class="kiosk-history-year-panel">
+        <p class="kiosk-eyebrow">{{ event.get_event_category_display }}</p>
+        <h1>{{ event.event_year }}</h1>
+        <p>Great Falls High School History</p>
+    </div>
+
+    <div class="kiosk-detail-content">
+        <h1>{{ event.title }}</h1>
+
+        {% if event.short_summary %}
+            <p class="kiosk-detail-summary">{{ event.short_summary }}</p>
+        {% endif %}
+
+        {% if event.full_story %}
+            <div class="kiosk-detail-section">
+                <h2>Story</h2>
+                {{ event.full_story|richtext }}
+            </div>
+        {% endif %}
+
+        <div class="kiosk-detail-section">
+            <h2>Why It Matters</h2>
+            <p>
+                This entry demonstrates how important moments, traditions, records, and stories
+                can be preserved in one shared historical system and displayed through both the
+                public website and touchscreen kiosk.
+            </p>
+        </div>
+
+        <div class="kiosk-detail-actions">
+            <a class="kiosk-action-button" href="/kiosk/history/">Back to History</a>
+            <a class="kiosk-action-button secondary" href="/kiosk/">Kiosk Home</a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

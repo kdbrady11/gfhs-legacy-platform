@@ -9,12 +9,12 @@
 
 <section class="kiosk-card-grid">
     {% for event in events %}
-        <article class="kiosk-card">
+        <a class="kiosk-card kiosk-card-link" href="/kiosk/history/{{ event.slug }}/">
             <h2>{{ event.event_year }}</h2>
             <h3>{{ event.title }}</h3>
             <p><strong>{{ event.get_event_category_display }}</strong></p>
             <p>{{ event.short_summary }}</p>
-        </article>
+        </a>
     {% empty %}
         <p>No historical events have been added yet.</p>
     {% endfor %}

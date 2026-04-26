@@ -74,3 +74,18 @@ def kiosk_history(request):
             "events": events,
         },
     )
+
+
+def kiosk_history_detail(request, slug):
+    event = get_object_or_404(
+        HistoricalEventPage.objects.live().public(),
+        slug=slug,
+    )
+
+    return render(
+        request,
+        "kiosk/kiosk_history_detail.html",
+        {
+            "event": event,
+        },
+    )

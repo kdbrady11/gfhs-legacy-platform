@@ -352,3 +352,53 @@ body {
         height: 460px;
     }
 }
+
+.kiosk-history-detail {
+    display: grid;
+    grid-template-columns: minmax(300px, 0.8fr) minmax(460px, 1.2fr);
+    gap: 3rem;
+    align-items: start;
+    max-width: 1350px;
+    margin: 0 auto;
+}
+
+.kiosk-history-year-panel {
+    position: sticky;
+    top: 2rem;
+    min-height: 520px;
+    border-radius: 2rem;
+    padding: 3rem;
+    background:
+        radial-gradient(circle at top left, rgba(108,180,238,0.35), transparent 38%),
+        linear-gradient(135deg, rgba(255,255,255,0.16), rgba(255,255,255,0.06));
+    border: 1px solid rgba(255,255,255,0.2);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.28);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.kiosk-history-year-panel h1 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(5rem, 10vw, 9rem);
+    line-height: 0.9;
+    margin: 1rem 0;
+    letter-spacing: -0.06em;
+}
+
+.kiosk-history-year-panel p {
+    font-size: 1.5rem;
+    line-height: 1.4;
+    color: rgba(255,255,255,0.9);
+}
+
+@media (max-width: 1000px) {
+    .kiosk-history-detail {
+        grid-template-columns: 1fr;
+    }
+
+    .kiosk-history-year-panel {
+        position: static;
+        min-height: 320px;
+    }
+}
