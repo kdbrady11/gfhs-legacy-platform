@@ -8,6 +8,11 @@ DEBUG = False
 # See https://docs.djangoproject.com/en/6.0/ref/contrib/staticfiles/#manifeststaticfilesstorage
 STORAGES["staticfiles"]["BACKEND"] = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
 
+ALLOWED_HOSTS = os.environ.get(
+    "ALLOWED_HOSTS",
+    "gfhs-legacy-platform.onrender.com,localhost,127.0.0.1",
+).split(",")
+
 try:
     from .local import *
 except ImportError:
