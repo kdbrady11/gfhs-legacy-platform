@@ -19,11 +19,55 @@ class HistoryIndexPage(Page):
 
     def get_context(self, request):
         context = super().get_context(request)
-        context["events"] = (
+
+        selected_category = request.GET.get("category", "").strip()
+        selected_year = request.GET.get("year", "").strip()
+        search_query = request.GET.get("q", "").strip()
+
+        category_labels = {
+            "school": "School History",
+            "athletics": "Athletics",
+            "fine_arts": "Fine Arts",
+            "community": "Community",
+            "building": "Building and Campus",
+            "tradition": "Tradition",
+        }
+
+        events = (
             HistoricalEventPage.objects.live()
             .public()
-            .order_by("event_year")
+            .order_by("-event_year", "title")
         )
+
+        if selected_category in category_labels:
+            events = events.filter(event_category=selected_category)
+
+        if selected_year.isdigit():
+            events = events.filter(event_year=int(selected_year))
+
+        if search_query:
+            events = events.filter(
+                models.Q(title__icontains=search_query)
+                | models.Q(short_summary__icontains=search_query)
+                | models.Q(full_story__icontains=search_query)
+            )
+
+        available_years = (
+            HistoricalEventPage.objects.live()
+            .public()
+            .order_by("-event_year")
+            .values_list("event_year", flat=True)
+            .distinct()
+        )
+
+        context["events"] = events
+        context["selected_category"] = selected_category
+        context["selected_category_label"] = category_labels.get(selected_category)
+        context["selected_year"] = selected_year
+        context["search_query"] = search_query
+        context["category_labels"] = category_labels
+        context["available_years"] = available_years
+
         return context
 
 

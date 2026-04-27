@@ -804,6 +804,46 @@ body {
     border-color: var(--gfhs-columbia-dark);
 }
 
+/* =========================
+   History Listing Layout
+========================= */
+
+.history-card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.6rem;
+    margin-top: 2rem;
+}
+
+.history-card {
+    height: 100%;
+}
+
+.history-card-image {
+    height: 260px;
+}
+
+.history-year-pill {
+    display: inline-block;
+    margin: 0 0 0.85rem;
+    padding: 0.45rem 0.8rem;
+    border-radius: 999px;
+    background: var(--gfhs-columbia-soft);
+    color: var(--gfhs-navy);
+    font-weight: 950;
+    border: 1px solid rgba(77, 179, 230, 0.38);
+}
+
+@media (max-width: 850px) {
+    .history-card-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .history-card-image {
+        height: 230px;
+    }
+}
+
 .callout {
     color: var(--gfhs-white);
 }
