@@ -12,4 +12,5 @@ urlpatterns = [
     path("archives/category/<slug:category_slug>/", views.kiosk_archive_category, name="kiosk_archive_category"),
     path("archives/<slug:slug>/", views.kiosk_archive_detail, name="kiosk_archive_detail"),
     path("support/", views.kiosk_support, name="kiosk_support"),
+    path("<path:unmatched_path>/", views.kiosk_not_found, name="kiosk_not_found"),
 ]

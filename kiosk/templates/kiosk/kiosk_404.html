@@ -1,0 +1,31 @@
+{% extends "kiosk/kiosk_base.html" %}
+
+{% block kiosk_content %}
+
+<section class="kiosk-detail-layout">
+    <div class="kiosk-history-year-panel">
+        <div class="kiosk-history-year-content">
+            <p class="kiosk-eyebrow">Kiosk Navigation</p>
+            <h1>404</h1>
+            <p>This kiosk page could not be found.</p>
+        </div>
+    </div>
+
+    <div class="kiosk-detail-content">
+        <h1>Let’s Get You Back</h1>
+
+        <p class="kiosk-detail-summary">
+            This touchscreen experience is designed to stay inside the GFHS Legacy kiosk.
+            Use the options below to return to the main kiosk sections.
+        </p>
+
+        <div class="kiosk-detail-actions">
+            <a class="kiosk-action-button" href="/kiosk/">Kiosk Home</a>
+            <a class="kiosk-action-button secondary" href="/kiosk/alumni/">Legacy Alumni</a>
+            <a class="kiosk-action-button secondary" href="/kiosk/history/">School History</a>
+            <a class="kiosk-action-button secondary" href="/kiosk/archives/">Archives</a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

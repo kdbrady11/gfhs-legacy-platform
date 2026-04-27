@@ -222,3 +222,6 @@ def kiosk_archive_detail(request, slug):
 
 def kiosk_support(request):
     return render(request, "kiosk/kiosk_support.html")
+
+def kiosk_not_found(request, unmatched_path=None):
+    return render(request, "kiosk/kiosk_404.html", status=404)
