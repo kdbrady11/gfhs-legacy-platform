@@ -1,19 +1,25 @@
+import os
+
 from .base import *
 
 DEBUG = False
 
-# ManifestStaticFilesStorage is recommended in production, to prevent
-# outdated JavaScript / CSS assets being served from cache
-# (e.g. after a Wagtail upgrade).
-# See https://docs.djangoproject.com/en/6.0/ref/contrib/staticfiles/#manifeststaticfilesstorage
-STORAGES["staticfiles"]["BACKEND"] = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
+ALLOWED_HOSTS = [
+    host.strip()
+    for host in os.environ.get(
+        "ALLOWED_HOSTS",
+        "gfhs-legacy-platform.onrender.com,localhost,127.0.0.1",
+    ).split(",")
+    if host.strip()
+]
 
-ALLOWED_HOSTS = os.environ.get(
-    "ALLOWED_HOSTS",
-    "gfhs-legacy-platform.onrender.com,localhost,127.0.0.1",
-).split(",")
+CSRF_TRUSTED_ORIGINS = [
+    origin.strip()
+    for origin in os.environ.get(
+        "CSRF_TRUSTED_ORIGINS",
+        "https://gfhs-legacy-platform.onrender.com",
+    ).split(",")
+    if origin.strip()
+]
 
-try:
-    from .local import *
-except ImportError:
-    pass
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
