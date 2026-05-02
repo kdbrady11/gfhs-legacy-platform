@@ -13,34 +13,88 @@
             </div>
         {% endif %}
 
+        <div class="card-grid">
+            <a class="card archive-category-card" href="/archives/?type=yearbook">
+                <div class="card-content">
+                    <h3>Yearbooks</h3>
+                    <p>Digitized yearbooks and class records.</p>
+                </div>
+            </a>
+
+            <a class="card archive-category-card" href="/archives/?type=newspaper">
+                <div class="card-content">
+                    <h3>Newspapers</h3>
+                    <p>Student newspapers, clippings, and publications.</p>
+                </div>
+            </a>
+
+            <a class="card archive-category-card" href="/archives/?type=photo">
+                <div class="card-content">
+                    <h3>Photos and Documents</h3>
+                    <p>Photographs, letters, records, and historical documents.</p>
+                </div>
+            </a>
+
+            <a class="card archive-category-card" href="/archives/?type=athletic_record">
+                <div class="card-content">
+                    <h3>Athletic Records</h3>
+                    <p>Teams, championships, records, athletes, and athletic milestones.</p>
+                </div>
+            </a>
+
+            <a class="card archive-category-card" href="/archives/?type=fine_arts">
+                <div class="card-content">
+                    <h3>Fine Arts</h3>
+                    <p>Programs, performances, music, theater, art, and fine arts history.</p>
+                </div>
+            </a>
+
+            <a class="card archive-category-card" href="/archives/?type=program">
+                <div class="card-content">
+                    <h3>Programs and Events</h3>
+                    <p>Graduation programs, event materials, and school celebrations.</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="callout">
+            <h2>Have Materials to Contribute?</h2>
+            <p>
+                If you have yearbooks, newspapers, photographs, programs, records, or other materials
+                connected to Great Falls High School, you can submit a contribution inquiry for review.
+                Materials are reviewed before they are added to the public archive or kiosk.
+            </p>
+            <a class="btn-primary" href="/contribute/">Submit a Contribution Inquiry</a>
+        </div>
+
         <form class="archive-filter-form" method="get">
             <div class="archive-filter-grid">
                 <div>
-                    <label for="history-search">Search history</label>
+                    <label for="archive-search">Search archives</label>
                     <input
-                        id="history-search"
+                        id="archive-search"
                         type="text"
                         name="q"
                         value="{{ search_query }}"
-                        placeholder="Search by title, summary, or story"
+                        placeholder="Search by title, description, source, or credit"
                     >
                 </div>
 
                 <div>
-                    <label for="history-category">Category</label>
-                    <select id="history-category" name="category">
-                        <option value="">All categories</option>
-                        {% for category_value, category_label in category_labels.items %}
-                            <option value="{{ category_value }}" {% if selected_category == category_value %}selected{% endif %}>
-                                {{ category_label }}
+                    <label for="archive-type">Document type</label>
+                    <select id="archive-type" name="type">
+                        <option value="">All types</option>
+                        {% for type_value, type_label in type_labels.items %}
+                            <option value="{{ type_value }}" {% if selected_type == type_value %}selected{% endif %}>
+                                {{ type_label }}
                             </option>
                         {% endfor %}
                     </select>
                 </div>
 
                 <div>
-                    <label for="history-year">Year</label>
-                    <select id="history-year" name="year">
+                    <label for="archive-year">Year</label>
+                    <select id="archive-year" name="year">
                         <option value="">All years</option>
                         {% for year in available_years %}
                             <option value="{{ year }}" {% if selected_year == year|stringformat:"s" %}selected{% endif %}>
@@ -52,47 +106,68 @@
 
                 <div class="archive-filter-actions">
                     <button type="submit">Apply Filters</button>
-                    <a href="/history/">Reset</a>
+                    <a href="/archives/">Reset</a>
                 </div>
             </div>
         </form>
 
-        {% if search_query or selected_category_label or selected_year %}
-            <p class="filter-status">
-                Showing filtered history results.
-                {% if search_query %} Search: "{{ search_query }}".{% endif %}
-                {% if selected_category_label %} Category: {{ selected_category_label }}.{% endif %}
-                {% if selected_year %} Year: {{ selected_year }}.{% endif %}
-            </p>
-        {% endif %}
+        <div class="callout">
+            <h2>
+                {% if selected_type_label %}
+                    {{ selected_type_label }}
+                {% else %}
+                    Preserved Archive Items
+                {% endif %}
+            </h2>
 
-        <div class="history-card-grid">
-            {% for event in events %}
-                <article class="card history-card">
-                    {% if event.primary_image %}
-                        {% image event.primary_image fill-700x420 as history_img %}
-                        <img class="card-image history-card-image" src="{{ history_img.url }}" alt="{{ event.title }}">
+            <p>
+                {% if search_query or selected_type_label or selected_year %}
+                    Showing filtered archive results.
+                    {% if search_query %} Search: "{{ search_query }}".{% endif %}
+                    {% if selected_type_label %} Type: {{ selected_type_label }}.{% endif %}
+                    {% if selected_year %} Year: {{ selected_year }}.{% endif %}
+                    <a class="inline-light-link" href="/archives/">View all archive items</a>
+                {% else %}
+                    Archive items added by admins will appear below. This section can preserve yearbooks,
+                    newspapers, photographs, programs, athletic records, fine arts materials, and other historical records.
+                {% endif %}
+            </p>
+        </div>
+
+        <div class="card-grid">
+            {% for item in archive_items %}
+                <article class="card clickable-card">
+                    {% if item.primary_image %}
+                        {% image item.primary_image fill-600x420 as archive_img %}
+                        <img class="card-image" src="{{ archive_img.url }}" alt="{{ item.title }}">
                     {% else %}
-                        <div class="card-image-placeholder history-card-image">
-                            <span>{{ event.event_year }}</span>
+                        <div class="card-image-placeholder">
+                            <span>{{ item.get_document_type_display|first }}</span>
                         </div>
                     {% endif %}
 
                     <div class="card-content">
-                        <p class="history-year-pill">{{ event.event_year }}</p>
-                        <h3>{{ event.title }}</h3>
+                        <h3>{{ item.title }}</h3>
 
-                        <p><strong>{{ event.get_event_category_display }}</strong></p>
-                        <p>{{ event.short_summary }}</p>
+                        {% if item.archive_year %}
+                            <p><strong>{{ item.archive_year }}</strong></p>
+                        {% endif %}
 
-                        <a href="{% pageurl event %}">Read Story</a>
+                        <p><strong>{{ item.get_document_type_display }}</strong></p>
+                        <p>{{ item.short_description }}</p>
+
+                        {% if item.credit_line %}
+                            <p><strong>Credit:</strong> {{ item.credit_line }}</p>
+                        {% endif %}
+
+                        <a class="card-button" href="{% pageurl item %}">Open Archive Item</a>
                     </div>
                 </article>
             {% empty %}
                 <div class="card">
                     <div class="card-content">
-                        <h3>No History Events Found</h3>
-                        <p>No history events match the current filters. Try adjusting the search, category, or year.</p>
+                        <h3>No Archive Items Found</h3>
+                        <p>No archive items match the current filters. Try adjusting the search, document type, or year.</p>
                     </div>
                 </div>
             {% endfor %}
