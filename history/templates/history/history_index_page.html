@@ -3,99 +3,175 @@
 
 {% block content %}
 
-<section class="section">
+<section class="section history-page">
     <div class="section-narrow">
-        <h1>{{ page.title }}</h1>
+        <div class="archive-hero-panel history-hero-panel">
+            <p class="archive-eyebrow">School History</p>
+            <h1>{{ page.title }}</h1>
 
-        {% if page.intro %}
-            <div class="lead">
-                {{ page.intro|richtext }}
-            </div>
-        {% endif %}
-
-        <form class="archive-filter-form" method="get">
-            <div class="archive-filter-grid">
-                <div>
-                    <label for="history-search">Search history</label>
-                    <input
-                        id="history-search"
-                        type="text"
-                        name="q"
-                        value="{{ search_query }}"
-                        placeholder="Search by title, summary, or story"
-                    >
+            {% if page.intro %}
+                <div class="lead">
+                    {{ page.intro|richtext }}
                 </div>
+            {% else %}
+                <p class="lead">
+                    Explore traditions, milestones, achievements, records, and defining moments
+                    connected to Great Falls High School.
+                </p>
+            {% endif %}
+        </div>
 
-                <div>
-                    <label for="history-category">Category</label>
-                    <select id="history-category" name="category">
-                        <option value="">All categories</option>
-                        {% for category_value, category_label in category_labels.items %}
-                            <option value="{{ category_value }}" {% if selected_category == category_value %}selected{% endif %}>
-                                {{ category_label }}
-                            </option>
-                        {% endfor %}
-                    </select>
+        <div class="archive-catalog-layout">
+            <aside class="archive-filter-rail">
+                <div class="archive-filter-rail-inner">
+                    <p class="archive-rail-title">History Categories</p>
+
+                    <nav class="archive-rail-nav" aria-label="History categories">
+                        <a href="/history/" class="{% if not selected_category %}active{% endif %}">
+                            All History
+                        </a>
+
+                        <a href="/history/?category=school" class="{% if selected_category == 'school' %}active{% endif %}">
+                            School History
+                        </a>
+
+                        <a href="/history/?category=athletics" class="{% if selected_category == 'athletics' %}active{% endif %}">
+                            Athletics
+                        </a>
+
+                        <a href="/history/?category=fine_arts" class="{% if selected_category == 'fine_arts' %}active{% endif %}">
+                            Fine Arts
+                        </a>
+
+                        <a href="/history/?category=community" class="{% if selected_category == 'community' %}active{% endif %}">
+                            Community
+                        </a>
+
+                        <a href="/history/?category=building" class="{% if selected_category == 'building' %}active{% endif %}">
+                            Building and Campus
+                        </a>
+
+                        <a href="/history/?category=tradition" class="{% if selected_category == 'tradition' %}active{% endif %}">
+                            Tradition
+                        </a>
+                    </nav>
+
+                    <div class="archive-rail-note">
+                        <strong>Have historical material?</strong>
+                        <p>Share information about photos, programs, records, or stories for review.</p>
+                        <a href="/contribute/">Submit Inquiry</a>
+                    </div>
                 </div>
+            </aside>
 
-                <div>
-                    <label for="history-year">Year</label>
-                    <select id="history-year" name="year">
-                        <option value="">All years</option>
-                        {% for year in available_years %}
-                            <option value="{{ year }}" {% if selected_year == year|stringformat:"s" %}selected{% endif %}>
-                                {{ year }}
-                            </option>
-                        {% endfor %}
-                    </select>
-                </div>
+            <main class="archive-catalog-main">
+                <div class="archive-search-toolbar">
+                    <form class="archive-filter-form archive-filter-form-contained" method="get">
+                        {% if selected_category %}
+                            <input type="hidden" name="category" value="{{ selected_category }}">
+                        {% endif %}
 
-                <div class="archive-filter-actions">
-                    <button type="submit">Apply Filters</button>
-                    <a href="/history/">Reset</a>
-                </div>
-            </div>
-        </form>
+                        <div class="archive-filter-grid archive-filter-grid-simple">
+                            <div>
+                                <label for="history-search">Search history</label>
+                                <input
+                                    id="history-search"
+                                    type="text"
+                                    name="q"
+                                    value="{{ search_query }}"
+                                    placeholder="Search by title, summary, or story"
+                                >
+                            </div>
 
-        {% if search_query or selected_category_label or selected_year %}
-            <p class="filter-status">
-                Showing filtered history results.
-                {% if search_query %} Search: "{{ search_query }}".{% endif %}
-                {% if selected_category_label %} Category: {{ selected_category_label }}.{% endif %}
-                {% if selected_year %} Year: {{ selected_year }}.{% endif %}
-            </p>
-        {% endif %}
+                            <div>
+                                <label for="history-year">Year</label>
+                                <select id="history-year" name="year">
+                                    <option value="">All years</option>
+                                    {% for year in available_years %}
+                                        <option value="{{ year }}" {% if selected_year == year|stringformat:"s" %}selected{% endif %}>
+                                            {{ year }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
 
-        <div class="history-card-grid">
-            {% for event in events %}
-                <article class="card history-card">
-                    {% if event.primary_image %}
-                        {% image event.primary_image fill-700x420 as history_img %}
-                        <img class="card-image history-card-image" src="{{ history_img.url }}" alt="{{ event.title }}">
-                    {% else %}
-                        <div class="card-image-placeholder history-card-image">
-                            <span>{{ event.event_year }}</span>
+                            <div class="archive-filter-actions">
+                                <button type="submit">Search</button>
+
+                                {% if selected_category %}
+                                    <a href="/history/?category={{ selected_category }}">Clear</a>
+                                {% else %}
+                                    <a href="/history/">Reset</a>
+                                {% endif %}
+                            </div>
                         </div>
-                    {% endif %}
+                    </form>
+                </div>
 
-                    <div class="card-content">
-                        <p class="history-year-pill">{{ event.event_year }}</p>
-                        <h3>{{ event.title }}</h3>
+                <div class="archive-results-header archive-results-header-compact">
+                    <div>
+                        <p class="archive-eyebrow">History Results</p>
 
-                        <p><strong>{{ event.get_event_category_display }}</strong></p>
-                        <p>{{ event.short_summary }}</p>
+                        <h2>
+                            {% if selected_category_label %}
+                                {{ selected_category_label }}
+                            {% else %}
+                                All History Events
+                            {% endif %}
+                        </h2>
 
-                        <a href="{% pageurl event %}">Read Story</a>
-                    </div>
-                </article>
-            {% empty %}
-                <div class="card">
-                    <div class="card-content">
-                        <h3>No History Events Found</h3>
-                        <p>No history events match the current filters. Try adjusting the search, category, or year.</p>
+                        <p>
+                            {% if search_query or selected_category_label or selected_year %}
+                                Showing history results.
+                                {% if selected_category_label %} Category: {{ selected_category_label }}.{% endif %}
+                                {% if search_query %} Search: "{{ search_query }}".{% endif %}
+                                {% if selected_year %} Year: {{ selected_year }}.{% endif %}
+                                <a class="inline-dark-link" href="/history/">View all history events</a>
+                            {% else %}
+                                Browse preserved school history entries as events, milestones, traditions,
+                                photos, and stories are reviewed and published.
+                            {% endif %}
+                        </p>
                     </div>
                 </div>
-            {% endfor %}
+
+                <div class="history-card-grid history-card-grid-catalog">
+                    {% for event in events %}
+                        <a class="card clickable-card history-card history-card-link" href="{% pageurl event %}">
+                            {% if event.primary_image %}
+                                {% image event.primary_image fill-700x420 as history_img %}
+                                <img class="card-image history-card-image" src="{{ history_img.url }}" alt="{{ event.title }}">
+                            {% else %}
+                                <div class="card-image-placeholder history-card-image">
+                                    <span>{{ event.event_year }}</span>
+                                </div>
+                            {% endif %}
+
+                            <div class="card-content">
+                                <p class="history-year-pill">{{ event.event_year }}</p>
+
+                                <h3>{{ event.title }}</h3>
+
+                                <p><strong>{{ event.get_event_category_display }}</strong></p>
+                                <p>{{ event.short_summary }}</p>
+
+                                <span class="card-button">Read Story</span>
+                            </div>
+                        </a>
+                    {% empty %}
+                        <div class="card archive-empty-card">
+                            <div class="card-content">
+                                <h3>No History Events Found</h3>
+                                <p>
+                                    No history events match the current search or year. Try adjusting the search,
+                                    changing the selected category, or clearing the filters.
+                                </p>
+                                <a class="card-button" href="/history/">Reset Filters</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </main>
         </div>
     </div>
 </section>
